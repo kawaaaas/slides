@@ -2,89 +2,204 @@
 marp: true
 theme: default
 paginate: true
-header: "仕様駆動開発のすすめ"
-footer: ""
 style: |
-  section {
-    font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
-    font-size: 24px;
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --bg: #0f172a;
+    --bg-light: #1e293b;
+    --accent: #60a5fa;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --border: rgba(255,255,255,0.08);
   }
+
+  section {
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    font-size: 26px;
+    background: var(--bg);
+    color: var(--text);
+    padding: 56px 72px 72px;
+    line-height: 1.8;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  section::after {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* --- Headings --- */
+  h1 {
+    font-weight: 900;
+    font-size: 40px;
+    color: var(--text);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 0.25em;
+    margin-bottom: 0.7em;
+    line-height: 1.3;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--muted);
+    margin-bottom: 0.6em;
+  }
+
+  h3 {
+    font-weight: 700;
+    font-size: 25px;
+    color: var(--accent);
+    margin-bottom: 0.3em;
+    margin-top: 0.6em;
+  }
+
+  /* --- Inline --- */
+  strong { color: var(--accent); font-weight: 700; }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* --- Code --- */
+  code {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.85em;
+    background: var(--bg-light);
+    color: #93c5fd;
+    padding: 0.15em 0.5em;
+    border-radius: 4px;
+  }
+
+  pre {
+    background: #151f32 !important;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1em 1.2em !important;
+  }
+
+  pre code {
+    background: none;
+    padding: 0;
+    font-size: 20px;
+    color: var(--text);
+  }
+
+  /* --- Lists --- */
+  ul, ol { line-height: 1.9; }
+  li::marker { color: var(--accent); }
+
+  /* --- Blockquote --- */
+  blockquote {
+    background: var(--bg-light);
+    border-left: 4px solid var(--accent);
+    padding: 0.7em 1.3em;
+    border-radius: 0 8px 8px 0;
+    color: var(--text);
+    font-size: 24px;
+    margin: 0.8em 0;
+  }
+
+  /* --- Table (force override default theme) --- */
+  section table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 22px;
+    border: none;
+    background: transparent;
+  }
+
+  section table tr {
+    background: transparent !important;
+    border: none !important;
+  }
+
+  section table th {
+    color: #e2e8f0 !important;
+    background: #1e293b !important;
+    font-weight: 700;
+    padding: 0.6em 1em;
+    text-align: left;
+    border: none !important;
+    border-bottom: 2px solid #60a5fa !important;
+  }
+
+  section table td {
+    color: #e2e8f0 !important;
+    background: transparent !important;
+    padding: 0.6em 1em;
+    text-align: left;
+    border: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  }
+
+  section table strong {
+    color: #60a5fa !important;
+  }
+
+  /* ================================
+     SLIDE VARIANTS
+     ================================ */
+
+  /* --- Title --- */
   section.title {
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
     text-align: center;
   }
+
   section.title h1 {
-    font-size: 48px;
+    font-size: 56px;
+    border-bottom: none;
+    padding-bottom: 0;
     margin-bottom: 0.2em;
   }
+
   section.title h2 {
-    font-size: 28px;
-    font-weight: normal;
-    color: #555;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--muted);
   }
-  section.tldr {
-    background: #f0f4ff;
-  }
-  section.tldr blockquote {
-    border-left: 6px solid #3b82f6;
-    background: white;
-    padding: 1em 1.5em;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
-  section.section-title {
-    display: flex;
-    flex-direction: column;
+
+  /* --- Divider --- */
+  section.divider {
     justify-content: center;
-    align-items: center;
     text-align: center;
-    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
-    color: white;
+    background: var(--bg-light);
   }
-  section.section-title h1 {
-    font-size: 52px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+
+  section.divider h1 {
+    font-size: 48px;
+    border-bottom: none;
+    margin-bottom: 0.15em;
   }
-  section.section-title header,
-  section.section-title footer {
-    color: rgba(255,255,255,0.6);
+
+  section.divider h2 {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--muted);
   }
-  table {
-    font-size: 20px;
-    width: 100%;
+
+  /* --- TL;DR --- */
+  section.tldr blockquote {
+    background: rgba(96,165,250,0.08);
+    border-left-width: 5px;
+    padding: 1em 1.8em;
+    font-size: 25px;
   }
-  th {
-    background: #2563eb;
-    color: white;
+
+  /* --- Quotes --- */
+  section.quotes blockquote {
+    margin: 0.5em 0;
+    padding: 0.5em 1.2em;
+    font-size: 22px;
   }
-  td, th {
-    padding: 0.5em 0.8em;
-  }
-  code {
-    font-size: 20px;
-  }
-  blockquote {
-    border-left: 4px solid #2563eb;
-    padding: 0.5em 1em;
-    color: #374151;
-    background: #f8fafc;
-  }
-  strong {
-    color: #1e40af;
-  }
-  h1 {
-    color: #1e3a5f;
-  }
-  ul {
-    line-height: 1.7;
-  }
+
+  /* --- Refs --- */
+  section.refs { font-size: 21px; }
+  section.refs ul { line-height: 2.2; }
 ---
 
 <!-- _class: title -->
-<!-- _header: "" -->
 <!-- _paginate: false -->
 
 # 仕様駆動開発のすすめ
@@ -97,93 +212,105 @@ style: |
 
 # TL;DR
 
-> AIを使ったコーディングを成功させる核心は、**シンプルな2点だけ**
+> AIコーディングで重要なのは **2点だけ**
 >
-> 1. **ちゃんとplanする**（コーディング前に意図を明文化する）
-> 2. **検証ループを整える**（AIが自律的に品質を確認できる仕組みを作る）
+> **1.** **ちゃんとplanする** -- コーディング前に意図を明文化する
+> **2.** **検証ループを整える** -- AIが自律的に品質を確認できる仕組みを作る
 >
-> Kiroは、この2点を**IDEレベルで誰でも踏めるように仕組み化**したツール。
-> でも考え方は、Claude Codeでも普段のチャットでも、すぐに使える。
+> Kiroはこの2点を **IDEレベルで仕組み化** したツール。
+> 考え方自体は Claude Code でも普段のチャットでも使える。
 
 ---
 
 # はじめに
 
-**この発表について：**
-
-- 川崎は自然言語処理の専門家ではない
-- 議論になったら、コメントでも質問してね
+- 川崎は自然言語処理の専門家ではないです
+- ゆるい感じで進めていくので、気になったらコメントでも質問でも是非！
+- このスライドはすべてAI × Marpで作成してます、時間なくすみません
 
 ---
 
-<!-- _class: section-title -->
+<!-- _class: divider -->
 
 # 1. 導入
+
 ## Claude Code作者が語る開発のコツ
 
 ---
 
 # 読んでほしい記事（3本）
 
-**① Boris Cherny氏（Claude Code作者）の開発手法**
-Claude Codeを作った本人が「自分はこう使っている」と語った内容の翻訳記事。
+### 1. Boris Cherny 氏（Claude Code 作者）
 
-**② Boris Tane氏（Cloudflare所属）の記事**
-"Boris違い" だが、独自の深い実践から生まれた方法論。
+Claude Codeを作った本人が「自分はこう使っている」と語った内容の翻訳記事
 
-**③ ごく個人的なClaude Codeプラクティス集**
-2026年2月公開の最近話題の記事。実践者目線のリアルな工夫が詰まっている。
+### 2. Boris Tane 氏（Cloudflare 所属）
+
+"Boris違い"だが、独自の深い実践から生まれた方法論（Cloudflare勤務のエンジニア）
+
+### 3. ごく個人的な Claude Code プラクティス集
+
+2026年2月公開。実践者目線のリアルな工夫が詰まっている
 
 ---
 
 # 3者が共通して言っていること
 
-一見するとHooksやスラッシュコマンドなど細かいTipsも多い。
+Hooks、スラッシュコマンドなど細かい Tips も多いが、
+**一番大事なこと**は意外とシンプル。
 
-でも**一番大事なこと**は、意外とシンプル。
-
-<!-- 次のスライドで詳しく -->
+> **Plan** と **検証ループ**。この2つ。
 
 ---
 
-# 共通点 ① ちゃんとplanする
+<!-- _class: quotes -->
+
+# 共通点 1 -- ちゃんとplanする
 
 **Boris Cherny:**
-> 「Planモードから始める。良いプランができるまでClaudeと議論し、そこから実装へ移る」
+
+> Planモードから始める。良いプランができるまでClaudeと議論し、そこから実装へ移る
 
 **Boris Tane:**
-> 「コードを書く前にプランをレビュー・アノテーションするサイクルを1〜6回繰り返す。`don't implement yet`が最重要」
+
+> コードを書く前にプランをレビュー・アノテーションするサイクルを1〜6回繰り返す。`don't implement yet` が最重要
 
 **Hawkie:**
-> 「Planモードから始め、違和感があれば積極的にフィードバックする。最低限の要件や仕様をこの段階で確認しておく」
+
+> Planモードから始め、違和感があれば積極的にフィードバック。最低限の要件や仕様をこの段階で確認しておく
 
 ---
 
-# 共通点 ② 検証ループ（テスト）を整える
+<!-- _class: quotes -->
+
+# 共通点 2 -- 検証ループを整える
 
 **Boris Cherny:**
-> 「Claudeに作業を**検証する方法を与えること**が最も重要。このフィードバックループがあれば品質が2〜3倍になる」
+
+> Claudeに作業を **検証する方法を与えること** が最も重要。フィードバックループがあれば品質が2〜3倍
 
 **Boris Tane:**
-> 「実装中は`continuously run typecheck`を指示する」
+
+> 実装中は `continuously run typecheck` を指示する
 
 **Hawkie:**
-> 「何も指示しないと正常系しかテストしない。CLAUDE.mdにTDDで進めるよう明記し、RED→GREEN→REFACTORのサイクルを明示する」
+
+> 何も指示しないと正常系しかテストしない。CLAUDE.mdにTDDで進めるよう明記し、RED → GREEN → REFACTOR のサイクルを明示する
 
 ---
 
-# その他の細かいTipsの位置づけ
+# その他 Tips の位置づけ
 
 CLAUDE.md、Hooks、MCP、並列実行……
-これらは生産性を上げる工夫であり、コンテキスト管理の問題を解決するもの。
+これらは生産性やコンテキスト管理の工夫。
 
-**開発の根幹はそこじゃない。**
+**plan と 検証ループがあった上での話。**
 
-> どんなツールを使っていても、**planとテスト（検証ループ）を意識するだけ**で開発品質が大きく変わる。
+> **plan と テスト（検証ループ）を意識するだけ** で開発品質は大きく変わる。
 
 ---
 
-<!-- _class: section-title -->
+<!-- _class: divider -->
 
 # 2. Kiroとは
 
@@ -191,31 +318,33 @@ CLAUDE.md、Hooks、MCP、並列実行……
 
 # Kiro 概要
 
-**AWS製のAIコーディングツール（2025年7月リリース、同年GA）**
+**AWS製のAIコーディングツール**（2025年7月リリース、同年GA）
 
-- KiroにはIDEとCLIがある（別物）
-  - **IDE**: VSCodeフォーク（Cursor、Antigravityと同じ立ち位置）
-  - **CLI**: Claude CodeやCodexに近いターミナル型エージェント
-- IDEに**仕様駆動開発（Spec-Driven Development）が組み込まれている**
-- 今回はIDEの話
+|          | IDE                         | CLI                        |
+| -------- | --------------------------- | -------------------------- |
+| 形態     | VSCode フォーク             | ターミナル型エージェント   |
+| 位置づけ | Cursor / Antigravity と同列 | Claude Code / Codex に近い |
+| 前身     | --                          | Amazon Q Developer         |
+
+IDEに **仕様駆動開発（Spec-Driven Development）が組み込まれている**。今回はこちらの話。
 
 ---
 
-# VibeモードとSpecモード
+# Vibe モードと Spec モード
 
-**Vibeモード**
+### Vibe モード
+
 従来のAIコーディング。チャットで対話しながら書いてもらうスタイル。
-プロトタイピングや小さなタスクに向いている。
+プロトタイピングや小さなタスク向き。
 
----
+### Spec モード（Kiro の最大の特徴）
 
-**Specモード（Kiroの最大の特徴）**
 アイデアを壁打ちして仕様を固め、その仕様に基づいて実装する。
-仕様を明確にしたいとき、複雑なフィーチャー開発やチーム開発に向いている。
+複雑なフィーチャー開発やチーム開発向き。
 
 ---
 
-<!-- _class: section-title -->
+<!-- _class: divider -->
 
 # 3. 仕様駆動開発とは
 
@@ -223,26 +352,26 @@ CLAUDE.md、Hooks、MCP、並列実行……
 
 # 仕様駆動開発の定義
 
-コーディングの前に仕様を明文化し、その仕様を正として開発する手法。
+コーディングの前に仕様を明文化し、**その仕様を正として開発する**手法。
 
-- 要件定義 → 設計 → 実装 → テストを段階的に進める
+- 要件定義 → 設計 → 実装 → テスト を段階的に進める
 - 事前の仕様策定により、品質向上と一貫性確保を図る
-- 仕様を明確にしたいときに有効（規模の大小に限らず）
+- 規模の大小に関わらず有効
 
 ---
 
-# Kiro固有のものではない
+# Kiro 固有のものではない
 
-仕様駆動開発の考え方は、Kiro以外のツールでも実践できる。
+仕様駆動開発は Kiro 以外のツールでも実践できる。
 
-- **spec-kit**: GitHubが公開しているOSSのツールキット
-- **cc-sdd**: Claude Codeで仕様駆動開発を始めるためのOSSツール
+- **spec-kit** -- GitHub が公開している OSS ツールキット
+- **cc-sdd** -- Claude Code で仕様駆動開発を始めるための OSS ツール
 
-> 「仕様を先に書く」という思想自体は、TDDやBDDと通じる普遍的なもの
+> 「仕様を先に書く」思想は TDD や BDD と通じる
 
 ---
 
-<!-- _class: section-title -->
+<!-- _class: divider -->
 
 # 4. Kiroにおける仕様駆動開発
 
@@ -250,212 +379,214 @@ CLAUDE.md、Hooks、MCP、並列実行……
 
 # Steering（ステアリング）
 
-`.kiro/steering/` に配置するMarkdownファイル群。
-Specに依らない全体的な開発ルールをここに書く。
+`.kiro/steering/` に配置する Markdown ファイル群。
+Spec に依らない **全体的な開発ルール** をここに書く。
 
-**典型的なステアリングファイル例：**
-- `product.md` — プロダクトの目的・ユーザー・ビジネス目標
-- `tech.md` — 使用技術スタック・ライブラリ・制約
-- `structure.md` — ファイル構成・命名規則・アーキテクチャ
-- `code-conventions.md` — コードスタイル・命名パターン
-- `tdd.md` — テスト方針
-
----
-
-# Steeringの読み込み制御
-
-inclusion設定により、3段階で制御できる。
-
-| 設定 | 挙動 |
-|---|---|
-| 常時読み込み | 毎回コンテキストに含まれる |
-| キーワード自動読み込み | 関連する話題で自動ロード |
-| 手動参照 | 明示的に参照したときだけ |
-
-> コンテキストの節約と情報の適切な提供を両立
+| ファイル              | 役割                                     |
+| --------------------- | ---------------------------------------- |
+| `product.md`          | プロダクトの目的・ユーザー・ビジネス目標 |
+| `tech.md`             | 使用技術スタック・ライブラリ・制約       |
+| `structure.md`        | ファイル構成・命名規則・アーキテクチャ   |
+| `code-conventions.md` | コードスタイル・命名パターン             |
+| `tdd.md`              | テスト方針                               |
 
 ---
 
-# Specの3ファイル構造
+# Steering の読み込み制御
 
-Specモードで開発すると、Kiroは以下の3ファイルを生成する。
+inclusion 設定で **3段階に制御** できる。
 
-**`requirements.md`**
-ユーザーストーリーと受け入れ基準（EARS記法）を記述。
-例: `THE System SHALL allow authenticated users to view active listings.`
+| 設定                       | 挙動                       |
+| -------------------------- | -------------------------- |
+| **常時読み込み**           | 毎回コンテキストに含まれる |
+| **キーワード自動読み込み** | 関連する話題で自動ロード   |
+| **手動参照**               | 明示的に参照したときだけ   |
 
-**`design.md`**
-システムアーキテクチャ、シーケンス図、実装方針を記述。
-
-**`tasks.md`**
-具体的な実装タスクのリスト（依存関係順）。
-Kiroが実装を進めながらタスクを更新していく。
+コンテキスト節約と情報の適切な提供を両立させる仕組み。
 
 ---
 
-# Specの種類
+# Spec の 3 ファイル構造
 
-**Feature Spec（Requirements-First）**
-何を作るかは明確だが技術的な道筋が未決の場合。
-要件→設計→タスクの順に進む。
+Spec モードで開発すると、Kiro は以下の 3 ファイルを生成する。
 
-**Feature Spec（Design-First）**
-技術アーキテクチャがすでに決まっている場合。
-設計→要件逆算→タスクの順に進む。
+### `requirements.md`
 
-**Bugfix Spec**
-バグ修正専用。「現在の挙動」「期待する挙動」「変えてはいけない挙動」の3セクション。
-リグレッション防止に特化。
+ユーザーストーリーと受け入れ基準（EARS 記法）
+`THE System SHALL allow authenticated users to view active listings.`
 
-> 用途に合わせてSpecを選ぶことが大事
+### `design.md`
+
+システムアーキテクチャ、シーケンス図、実装方針
+
+### `tasks.md`
+
+実装タスクのリスト（依存関係順）。Kiro が実装しながら更新。
 
 ---
 
-<!-- _class: section-title -->
+# Spec の種類
+
+### Feature Spec（Requirements-First）
+
+何を作るかは明確だが技術的な道筋が未決 → **要件 → 設計 → タスク**
+
+### Feature Spec（Design-First）
+
+技術アーキテクチャがすでに決まっている → **設計 → 要件逆算 → タスク**
+
+### Bugfix Spec
+
+バグ修正専用。3 セクション構成：
+**現在の挙動** / **期待する挙動** / **変えてはいけない挙動**
+
+---
+
+<!-- _class: divider -->
 
 # 5. 検証ループ
+
 ## プロパティベーステスト
 
 ---
 
-# AIコード生成の根本的な問題
+# AI コード生成の問題
 
-AIがコードを生成したとき、
-**「そのコードが仕様通りか」をどうやって確認するか？**
+AI がコードを生成したとき、**そのコードが仕様通りかどうか** をどう確認するか。
 
-従来のユニットテストは**「例示テスト」**。
-「この入力ならこの出力」という個別のケースを確認するにすぎない。
-
-テストを書く人（人間でもAIでも）が
-思いつかなかったエッジケースは漏れる。
+従来のユニットテストは「この入力ならこの出力」という個別ケースの確認。
+テストを書く側が思いつかなかったエッジケースは漏れる。
 
 ---
 
-# プロパティベーステスト（PBT）とは
+# プロパティベーステスト（PBT）
 
-| | ユニットテスト | プロパティベーステスト |
-|---|---|---|
-| テストの書き方 | 「入力Aのとき出力はBであること」 | 「任意の入力について、この性質が成り立つこと」 |
-| テストケース数 | 手書きで用意した数だけ | 数百〜数千をランダム生成 |
-| 向いている場面 | 仕様の特定ケースを確認 | 仕様の普遍的な性質（不変条件）を検証 |
+|                | ユニットテスト       | PBT                          |
+| -------------- | -------------------- | ---------------------------- |
+| **書き方**     | 入力A → 出力B を確認 | 任意の入力で性質が成り立つか |
+| **ケース数**   | 手書きで用意した分   | 数百〜数千をランダム生成     |
+| **得意な場面** | 特定ケースの確認     | 不変条件の検証               |
 
 ---
 
-# PBTの例：交通信号シミュレーター
+# PBT の例：交通信号シミュレーター
 
-**要件（EARS記法）：**
+### 要件（EARS 記法）
+
 `THE System SHALL ensure no two directions are green at the same time.`
 
-**ユニットテスト：**
-「北が青のとき、南は赤か」を1ケース確認
+### ユニットテスト
 
-**PBT：**
+「北が青のとき、南は赤か」を 1 ケース確認
+
+### PBT
+
 ランダムな信号状態パターンを何千通りも生成し、
 常にこの性質が成り立つか検証
 
 ---
 
-# KiroにおけるPBTの位置づけ
+# Kiro における PBT
 
-GA版で追加された新機能。
+GA版で追加された機能。
 
-- KiroはEARS記法で書かれた要件から、自動的にプロパティを抽出
-- そのプロパティに対してランダムなテストケースを大量生成して実行
-- 反例が見つかったら、実装・テスト・仕様のどれを修正すべきかをサーフェス
-- Bugfix Specでは「変えてはいけない挙動」も含めてPBTが生成
+- EARS 記法の要件から自動的に **プロパティを抽出**
+- ランダムなテストケースを **大量生成して実行**
+- 反例が見つかったら、実装・テスト・仕様のどれを修正すべきか提示
+- Bugfix Spec では「変えてはいけない挙動」も PBT で検証
 
-> これが「仕様とコードが本当に一致しているか」を機械的に検証する仕組み
-
----
-
-<!-- _class: section-title -->
-
-# 6. 仕様駆動開発を成功させるコツ
+> 仕様とコードの一致を **機械的に検証** する仕組み
 
 ---
 
-# ① まずSteeringを整備する
+<!-- _class: divider -->
 
-- Specを作り始める前に、全体的な開発ルールをSteeringに書いておく
-- 複数のSpecに跨る事項はSteeringが担う
-  - 使う技術・命名規則・テスト方針など
-- Steeringが整っていると、各Specがシンプルになり、AIが毎回同じルールを守ってくれる
+# 6. 成功させるコツ
 
 ---
 
-# ② Specを大きくしすぎない
+# 1 -- まず Steering を整備する
 
-**これが最重要のベストプラクティス。**
-
-- 要件が大きいと、どこかが漏れやすくなる
-- レビュー負荷が下がり、自分もAIも迷いにくくなる
-- **独立したドメインに閉じた範囲で分割する**ことがベストプラクティス
-  （機能を小さく切るというより、関心事を分離して互いに依存しない単位にする）
+- Spec を書く前に、全体の開発ルールを Steering に入れておく
+- 複数 Spec に跨る事項（技術・命名規則・テスト方針）は Steering が担う
+- Steering が整っていれば各 Spec がシンプルになり、AI が一貫したルールで動く
 
 ---
 
-# ③ 用途に合わせたSpecを選ぶ
+# 2 -- Spec を大きくしすぎない（最重要）
 
-Feature Spec（Requirements-First / Design-First）、Bugfix Specなど、
-用途に合ったSpecを選ぶ。
-
-特にバグ修正には**Bugfix Spec**が有効。
-「変えてはいけない挙動」を最初に明示するのがポイント。
+- 要件が大きいと漏れやすい
+- レビュー負荷が下がり、自分も AI も迷いにくくなる
+- **独立したドメインに閉じた範囲で分割する**
+  -- 機能を小さく切るというより、関心事を分離して依存しない単位にする
 
 ---
 
-# ④ Plan工程に強いモデルを使う
+# 3 -- 用途に合わせた Spec を選ぶ
 
-仕様策定フェーズが最も重要なので、ここでモデルをケチらない。
+Feature Spec（Requirements-First / Design-First）、Bugfix Spec など
+**用途に合った Spec を選ぶ**。
 
-OpusとSonnetでは、仕様の質に大きな差が出る。
+特にバグ修正には **Bugfix Spec** が有効。
+「**変えてはいけない挙動**」を最初に明示する。
+
+---
+
+# 4 -- Plan 工程に強いモデルを使う
+
+仕様策定フェーズが最も重要。**ここでモデルをケチらない。**
+
+Opus と Sonnet では仕様の質に差が出る。
 実装フェーズでも同様で、モデルの品質は常に結果に影響する。
 
 ---
 
-# ⑤ コンテキストを節約する
+# 5 -- コンテキストを節約する
 
-KiroはSteeringや仕様ファイルを常時読み込むため、コンテキストが圧迫されやすい。
+Kiro は Steering や仕様ファイルを常時読み込むため、コンテキストが圧迫されやすい。
 
-- Steeringの内容を厳選・精査する
-- 特定ユースケースにしか使わない情報はSkillsに退避
-- MCPを目的に合わせて選別する
-- **Powersを活用する**
-  - MCP・Steering・Hooksを1パッケージにまとめたもの
-  - キーワードに反応して必要なときだけ動的にロード
-  - Figma、Supabase、Stripe等のパートナー製Powerも存在
+- Steering の内容を **厳選・精査**
+- 特定ユースケース限定の情報は Skills に退避
+- MCP を目的に合わせて選別
+- **Powers を活用** -- MCP・Steering・Hooks を 1 パッケージにまとめ、
+  キーワードに反応して必要なときだけ動的にロード。
+  Figma / Supabase / Stripe 等のパートナー製 Power もある。
 
 ---
 
-<!-- _class: section-title -->
+<!-- _class: divider -->
 
 # 7. まとめ
 
 ---
 
-# 今日持ち帰ってほしいこと
+# 持ち帰ってほしいこと
 
-**① Kiroというツールが存在すること**
-VSCodeフォークで、Spec-Driven Developmentが組み込まれたAWS製のAI IDE。
+### 1. Kiro というツールの存在
 
-**② 仕様駆動開発という考え方**
-コードを書く前に意図を明文化し、その仕様を正として開発する。
-Kiro固有ではなく、どんなツールでも意識できる普遍的な考え方。
+VSCode フォークで、Spec-Driven Development が組み込まれた AWS 製 AI IDE。
 
-**③ 今日からできること**
-- Claude Codeを使うとき → 最初にPlanモードで計画させてみよう
-- 普段のChat → 「まず計画を立てて」と一言加えるだけで変わる
-- 検証ループを必ず作ろう → まずlinterからでもOK
+### 2. 仕様駆動開発という考え方
+
+コードを書く前に意図を明文化し、その仕様を正として開発する。Kiro 固有ではない。
+
+### 3. 今日からできること
+
+- Claude Code → 最初に **Plan モード** で計画させる
+- 普段の Chat → 「**まず計画を立てて**」と一言加える
+- 検証ループを作る → linter からでも OK
 
 ---
 
+<!-- _class: refs -->
+
 # 参考リンク
 
-- [Kiro公式](https://kiro.dev) / [Docs: Specs](https://kiro.dev/docs/specs/) / [Docs: Steering](https://kiro.dev/docs/steering/)
-- [Kiro Powers](https://kiro.dev/powers/) / [PBT](https://kiro.dev/blog/property-based-testing/)
+- [Kiro 公式](https://kiro.dev) / [Docs: Specs](https://kiro.dev/docs/specs/) / [Docs: Steering](https://kiro.dev/docs/steering/)
+- [Kiro Powers](https://kiro.dev/powers/) / [Property-Based Testing](https://kiro.dev/blog/property-based-testing/)
 - [Spec types（AWS Blog）](https://aws.amazon.com/jp/blogs/news/specs-bugfix-and-design-first/)
-- [Boris Cherny氏の記事（翻訳）](https://zenn.dev/mohy_nyapan/articles/a07975837386f7)
-- [Boris Tane氏の記事](https://boristane.com/blog/how-i-use-claude-code/)
-- [ごく個人的なClaude Codeプラクティス集](https://zenn.dev/hawkymisc/articles/2cace1f599cc06)
-- [spec-kit](https://github.com/github/spec-kit) / [cc-sdd](https://github.com/gotalab/cc-sdd)
+- [Boris Cherny 氏の記事（翻訳）](https://zenn.dev/mohy_nyapan/articles/a07975837386f7)
+- [Boris Tane 氏の記事](https://boristane.com/blog/how-i-use-claude-code/)
+- [ごく個人的な Claude Code プラクティス集](https://zenn.dev/hawkymisc/articles/2cace1f599cc06)
+- [spec-kit（GitHub OSS）](https://github.com/github/spec-kit) / [cc-sdd](https://github.com/gotalab/cc-sdd)
 - [実例リポジトリ](https://github.com/kawaaaas/serverless-spa-construct-test)
